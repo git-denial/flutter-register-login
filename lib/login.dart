@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'API.dart';
 
 class LoginPage extends StatefulWidget {
   @override
@@ -8,6 +9,9 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
+
+  String email = '';
+  String password = '';
 
   @override
   void initState() {
@@ -94,6 +98,11 @@ class _LoginPageState extends State<LoginPage> {
                       ]
                     ),
                     child: TextField(
+                      onChanged: (String x){
+                        setState(() {
+                          email = x;
+                        });
+                      },
                       decoration: InputDecoration(
                         border: InputBorder.none,
                         icon: Icon(Icons.person,
@@ -124,6 +133,11 @@ class _LoginPageState extends State<LoginPage> {
                         ]
                     ),
                     child: TextField(
+                      onChanged: (String x){
+                        setState(() {
+                          password = x;
+                        });
+                        },
                       obscureText: true,
                       decoration: InputDecoration(
                         border: InputBorder.none,
@@ -139,8 +153,16 @@ class _LoginPageState extends State<LoginPage> {
                   Spacer(),
 
                   InkWell(
-                      onTap: (){
-                        Navigator.pushNamed(context, '/');
+                      onTap: ()async{
+                        debugPrint(email);
+                        debugPrint(password);
+                        var x = await login(email,password);
+                        if(x['token'] == null)
+                          debugPrint(x['error']);
+                        else
+                          debugPrint('Successfully logged in!');
+                          debugPrint(x['token']);
+                        //Navigator.pushNamed(context, '/');
                       },
                       child: Container(
                       height: 45,

@@ -11,7 +11,7 @@ class TC extends StatelessWidget {
       initialRoute: '/login',
       debugShowCheckedModeBanner: false,
       routes: {
-        '/': (context) => SignupPage(),
+        '/': (context) => LoginPage(),
         '/login': (context) => LoginPage(),
         '/signup' :(context) => SignupPage(),
       },
